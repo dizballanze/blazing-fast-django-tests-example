@@ -37,3 +37,12 @@ class ArticlesListPaginationTestCase(BaseBlogTestCase):
         self.assertEqual(str(resp_page_2.content).count('<article>'), 20)
         resp_page_3 = self.client.get(reverse('articles_list') + '?page=3')
         self.assertEqual(str(resp_page_3.content).count('<article>'), 10)
+
+    def test_foo_bar(self):
+        ...
+
+    def test_spam(self):
+        ...
+
+    def test_holy_grenade(self):
+        ...
