@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Author: {{ author.username }}</h1>
+
+{% if show_articles_link %}
+<p><a href="#">{{ author.username }}'s articles</a></p>
+{% endif %}
+{% endblock %}

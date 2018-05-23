@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Articles list{% endblock %}
+
+{% block content %}
+<h1>Articles list</h1>
+
+<p>Authors count: {{ authors_count }}</p>
+
+<h2>Top authors</h2>
+
+<ul>
+    {% for author in top_authors %}
+    <li>{{ author.username }} ({{ author.articles_count }})</li>
+    {% endfor %}
+</ul>
+
+{% for article in articles %}
+<article>
+    <h2>{{ article.title }}</h2>
+    <time>{{ article.created_at }}</time>
+    <p>Author: <a href="{% url 'author_page' username=article.author.username %}">{{ article.author.username }}</a></p>
+    <p>Tags:
+    {% for tag in article.tags.all %}
+        {{ tag }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</article>
+{% endfor %}
+
+{% endblock %}
