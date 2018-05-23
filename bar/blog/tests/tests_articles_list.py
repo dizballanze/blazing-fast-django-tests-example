@@ -14,16 +14,16 @@ class ArticlesListTestCase(BaseBlogTestCase):
 
 class ArticlesListPaginationTestCase(BaseBlogTestCase):
 
-    def setUp(self):
-        super().setUp()
-        self.tags = self._create_tags()
+    @classmethod
+    def setUpTestData(cls):
+        cls.tags = cls._create_tags()
         for author_num in range(5):
-            author = self._create_author(
+            author = cls._create_author(
                 'author-{}'.format(author_num), 'author-{}@e.co'.format(author_num), 'Bio #{}'.format(author_num),
                 'v3rys3cr31')
             for article_num in range(10):
-                self._create_article(
-                    'Article #{}'.format(author_num*10+article_num), 'foo bar', author, True, self.tags)
+                cls._create_article(
+                    'Article #{}'.format(author_num*10+article_num), 'foo bar', author, True, cls.tags)
 
     def test_first_20_articles_are_on_the_page(self):
         resp = self.client.get(reverse('articles_list'))
