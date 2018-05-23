@@ -12,6 +12,6 @@ class AuthorPageTestCase(BaseBlogTestCase):
         self.assertEqual(reverse('author_page', kwargs=dict(username='foo-bar')), '/blog/authors/foo-bar')
 
     def test_author_name_on_its_page(self):
-        author = self.authors[0]
+        author = self._create_author('foobar', 'foobar@e.co', 'spam', 'v3rys3cr31')
         resp = self.client.get(reverse('author_page', kwargs=dict(username=author.username)))
         self.assertIn(author.username, str(resp.content))

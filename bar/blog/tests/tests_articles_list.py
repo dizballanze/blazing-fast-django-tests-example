@@ -11,6 +11,20 @@ class ArticlesListTestCase(BaseBlogTestCase):
     def test_url_resolving(self):
         self.assertEqual(reverse('articles_list'), '/blog/')
 
+
+class ArticlesListPaginationTestCase(BaseBlogTestCase):
+
+    def setUp(self):
+        super().setUp()
+        self.tags = self._create_tags()
+        for author_num in range(5):
+            author = self._create_author(
+                'author-{}'.format(author_num), 'author-{}@e.co'.format(author_num), 'Bio #{}'.format(author_num),
+                'v3rys3cr31')
+            for article_num in range(10):
+                self._create_article(
+                    'Article #{}'.format(author_num*10+article_num), 'foo bar', author, True, self.tags)
+
     def test_first_20_articles_are_on_the_page(self):
         resp = self.client.get(reverse('articles_list'))
         for i in range(20):

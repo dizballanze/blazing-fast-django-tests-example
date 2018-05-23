@@ -11,7 +11,7 @@ class ArticlesListView(ListView):
     model = Article
     context_object_name = 'articles'
     paginate_by = 20
-    queryset = Article.objects.all()
+    queryset = Article.objects.all().order_by('id')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
